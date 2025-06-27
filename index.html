@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NASA Space Explorer</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <!-- NASA fonts for branding -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,700|Public+Sans:400,700|Source+Sans+Pro:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -19,6 +21,9 @@
       <button>Get Space Images</button>
     </div>
 
+    <!-- Random Space Fact (LevelUp) -->
+    <div id="space-fact" class="placeholder" style="margin-bottom: 20px; display: none;"></div>
+
     <div id="gallery" class="gallery">
       <div class="placeholder">
         <div class="placeholder-icon">🔭</div>
@@ -27,7 +32,47 @@
     </div>
   </div>
 
+  <!-- Modal for image details -->
+  <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:1000;">
+    <div id="modal-content" style="background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow:auto; padding:20px; position:relative;">
+      <button id="modal-close" style="position:absolute; top:10px; right:10px; font-size:20px; background:none; border:none; cursor:pointer;">&times;</button>
+      <!-- Modal content will be filled by JS -->
+    </div>
+  </div>
+
   <script src="js/dateRange.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    // Show the gallery with images and videos
+    function showGallery(items) {
+      gallery.innerHTML = '';
+      items.forEach(item => {
+        let mediaContent = '';
+        // If it's an image, show the image and make it clickable
+        if (item.media_type === 'image') {
+          mediaContent = `<img src="${item.url}" alt="${item.title}" class="gallery-img" style="cursor:pointer;" />`;
+        }
+        // If it's a video, just show a link
+        else if (item.media_type === 'video') {
+          mediaContent = `<a href="${item.url}" target="_blank">Watch Video</a>`;
+        }
+        // Create the gallery item
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `
+          ${mediaContent}
+          <p><strong>${item.title}</strong><br>${item.date}</p>
+        `;
+        // Only add click event for images
+        const img = div.querySelector('img');
+        if (img) {
+          img.addEventListener('click', () => {
+            openModal(item);
+          });
+        }
+        gallery.appendChild(div);
+      });
+    }
+  </script>
 </body>
 </html>
