@@ -12,6 +12,11 @@ body {
   padding: 20px;
 }
 
+/* NASA font stack for all text */
+body, h1, h2, h3, h4, h5, h6, button, input, p {
+  font-family: 'Public Sans', 'Inter', 'Source Sans Pro', Arial, sans-serif;
+}
+
 /* Centered container */
 .container {
   max-width: 1200px;
@@ -122,6 +127,15 @@ button:hover {
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+}
+
+/* Hover zoom effect for gallery images */
+.gallery-img {
+  transition: transform 0.3s;
+}
+.gallery-img:hover {
+  transform: scale(1.08);
+  z-index: 2;
 }
 
 .gallery-item p {

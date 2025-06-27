@@ -154,3 +154,25 @@ button.addEventListener('click', () => {
 const initialStartDate = startInput.value;
 const initialEndDate = endInput.value;
 fetchImages(initialStartDate, initialEndDate);
+
+// Random Space Fact (LevelUp)
+const facts = [
+  "Venus spins backwards compared to most planets.",
+  "A day on Mars is just over 24 hours.",
+  "Jupiter has at least 95 moons.",
+  "The Sun is over 99% of the mass in our solar system.",
+  "Neutron stars can spin 600 times per second.",
+  "A spoonful of a neutron star weighs about a billion tons.",
+  "Space is not completely empty—there are a few atoms per cubic meter.",
+  "The footprints on the Moon will be there for millions of years.",
+  "Saturn could float in water because it’s mostly gas.",
+  "There are more stars in the universe than grains of sand on Earth."
+];
+
+// Show a random fact on page load
+const factBox = document.getElementById('space-fact');
+if (factBox) {
+  const randomFact = facts[Math.floor(Math.random() * facts.length)];
+  factBox.textContent = `Did you know? ${randomFact}`;
+  factBox.style.display = 'block';
+}
